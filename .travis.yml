@@ -1,0 +1,10 @@
+sudo: required
+services:
+  # automatically install a docker instance
+  - docker
+
+before_install:
+  - docker build -t uladzimirkalesny/react-docker-ci -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true uladzimirkalesny/react-docker-ci npm run test -- --coverage
